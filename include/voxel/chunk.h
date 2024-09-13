@@ -21,6 +21,7 @@
 
 #include <array>
 #include <voxel/fwdecl.h>
+#include <voxel/block.h>
 #include <blt/std/hashmap.h>
 
 namespace voxel
