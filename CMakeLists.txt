@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.28)
-project(voxel-game VERSION 0.0.2)
+cmake_minimum_required(VERSION 3.25)
+project(voxel-game VERSION 0.0.3)
 
 option(ENABLE_ADDRSAN "Enable the address sanitizer" OFF)
 option(ENABLE_UBSAN "Enable the ub sanitizer" OFF)
 option(ENABLE_TSAN "Enable the thread data race sanitizer" OFF)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(lib/blt-with-graphics)
 
