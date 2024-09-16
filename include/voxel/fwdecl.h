@@ -26,6 +26,7 @@ namespace voxel
 {
     
     inline constexpr blt::u64 CHUNK_SIZE = 32;
+    inline constexpr blt::i32 IMAGE_SIZE = 64;
     inline const blt::u64 CHUNK_MASK = static_cast<blt::u64>(std::log2(CHUNK_SIZE));
     
     using block_id_t = blt::u64;

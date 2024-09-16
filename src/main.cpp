@@ -20,9 +20,10 @@
 #include "blt/gfx/renderer/camera.h"
 #include <imgui.h>
 #include <voxel/chunk.h>
+#include <thread>
 
 blt::gfx::matrix_state_manager global_matrices;
-blt::gfx::resource_manager resources;
+blt::gfx::resource_manager resources {VOXEL_RES_DIR};
 blt::gfx::batch_renderer_2d renderer_2d(resources, global_matrices);
 blt::gfx::first_person_camera camera;
 
@@ -30,9 +31,14 @@ void init(const blt::gfx::window_data&)
 {
     using namespace blt::gfx;
     
+    texture_array block_array{"blocks", voxel::IMAGE_SIZE, voxel::IMAGE_SIZE};
+    block_array.add_texture("ham.png", "ham");
+    
+    resources.with(texture_info{"ham.png", "ham"}.set_desired_width(voxel::IMAGE_SIZE).set_desired_height(voxel::IMAGE_SIZE));
+    resources.with(std::move(block_array));
     
     global_matrices.create_internals();
-    resources.load_resources();
+    resources.load_resources(std::thread::hardware_concurrency());
     renderer_2d.create();
 }
 
@@ -43,6 +49,8 @@ void update(const blt::gfx::window_data& data)
     camera.update();
     camera.update_view(global_matrices);
     global_matrices.update();
+    
+    renderer_2d.drawRectangleInternal("ham", {50, 50, voxel::IMAGE_SIZE, voxel::IMAGE_SIZE});
     
     renderer_2d.render(data.width, data.height);
 }

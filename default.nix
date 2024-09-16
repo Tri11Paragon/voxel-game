@@ -1,11 +1,17 @@
-let
-	pkgs = import <nixpkgs> {};
-in pkgs.mkShell
+{ pkgs ? (import <nixpkgs> { 
+    config.allowUnfree = true;
+    config.segger-jlink.acceptLicense = true; 
+}), ... }:
+pkgs.mkShell
 {
 	buildInputs = with pkgs; [
 		cmake 
 		gcc
+		clang
 		ninja
+		jetbrains.clion
+		renderdoc
+		valgrind
 	];
 	propagatedBuildInputs = with pkgs; [
 		xorg.libX11 
@@ -37,6 +43,7 @@ in pkgs.mkShell
 		git
 		libGL
 		libGL.dev
+		glfw
 	];
 
 }
