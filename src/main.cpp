@@ -33,6 +33,7 @@ void init(const blt::gfx::window_data&)
     
     texture_array block_array{"blocks", voxel::IMAGE_SIZE, voxel::IMAGE_SIZE};
     block_array.add_texture("ham.png", "ham");
+    block_array.add_texture("meow.png", "meow");
     
     resources.with(texture_info{"ham.png", "ham"}.set_desired_width(voxel::IMAGE_SIZE).set_desired_height(voxel::IMAGE_SIZE));
     resources.with(std::move(block_array));
